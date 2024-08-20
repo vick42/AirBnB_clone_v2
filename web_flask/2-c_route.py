@@ -7,23 +7,26 @@ from flask import Flask, escape
 app = Flask(__name__)
 
 
-@app.route('/', strict_slashes=False)
-def index():
-    """function to return Hello HBNB!"""
+@app.route('/')
+def hello():
+    """Return string when route queried
+    """
     return 'Hello HBNB!'
 
 
-@app.route('/hbnb', strict_slashes=False)
-def hello():
-    """ function to display HBNB"""
+@app.route('/hbnb')
+def hbnb():
+    """Return string when route queried
+    """
     return 'HBNB'
 
 
-@app.route('/c/<text>', strict_slashes=False)
-def ctext(text):
-    """ function to display C + value of text """
-    text = text.replace("_", " ")
-    return 'C {}'.format(escape(text))
+@app.route('/c/<text>')
+def c_is_fun(text):
+    """Return reformatted text
+    """
+    return 'C ' + text.replace('_', ' ')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000')
+    app.url_map.strict_slashes = False
+    app.run(host='0.0.0.0', port=5000)
